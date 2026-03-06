@@ -14,6 +14,7 @@ class Presentation {
     this.visibleClass = this.container.getAttribute('data-vc') || options.visibleClass || 'active';
     this.hiddenClass = this.container.getAttribute('data-hc') || options.hiddenClass || 'hidden';
     this.baseClass = this.container.getAttribute('data-bc') || options.baseClass || '';
+    this.showUI = options.ui !== false; // defaults to true
 
     // Direct children are slides
     this.slides = Array.from(this.container.children);
@@ -76,9 +77,114 @@ class Presentation {
   _init() {
     this._render();
     if (this.slides.length > 0) {
+      if (this.showUI) {
+        this._buildUI();
+      }
       this.bindKeyboard();
       this.bindClick();
     }
+  }
+
+  _buildUI() {
+    // Create UI Container
+    this.uiContainer = document.createElement('div');
+    this.uiContainer.className = 'aip-ui-container';
+
+    // Prev Button
+    this.btnPrev = document.createElement('button');
+    this.btnPrev.className = 'aip-btn aip-prev';
+    this.btnPrev.innerHTML = '&#8592; Prev';
+    this.btnPrev.addEventListener('click', (e) => { e.stopPropagation(); this.prev(); });
+
+    // Menu Button
+    this.btnMenu = document.createElement('button');
+    this.btnMenu.className = 'aip-btn aip-menu-btn';
+    this.btnMenu.innerText = 'Menu';
+
+    // Next Button
+    this.btnNext = document.createElement('button');
+    this.btnNext.className = 'aip-btn aip-next';
+    this.btnNext.innerHTML = 'Next &#8594;';
+    this.btnNext.addEventListener('click', (e) => { e.stopPropagation(); this.next(); });
+
+    // Menu Popup
+    this.menuPopup = document.createElement('div');
+    this.menuPopup.className = 'aip-menu';
+    const ul = document.createElement('ul');
+
+    // Populate Menu Items
+    this.menuItems = [];
+    this.slides.forEach((slide, index) => {
+      // Find first h1, h2, or h3
+      const heading = slide.querySelector('h1, h2, h3');
+      const title = heading ? heading.innerText : `Slide ${index + 1}`;
+
+      const li = document.createElement('li');
+      li.innerText = title;
+      li.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.goToSlide(index);
+        this.menuPopup.classList.remove('active');
+      });
+      this.menuItems.push(li);
+      ul.appendChild(li);
+    });
+
+    this.menuPopup.appendChild(ul);
+
+    // Toggle menu
+    this.btnMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.menuPopup.classList.toggle('active');
+    });
+
+    // Close menu on outside click
+    document.addEventListener('click', () => {
+      this.menuPopup.classList.remove('active');
+    });
+
+    this.uiContainer.appendChild(this.btnPrev);
+    this.uiContainer.appendChild(this.btnMenu);
+    this.uiContainer.appendChild(this.btnNext);
+    this.uiContainer.appendChild(this.menuPopup);
+
+    // Attempt to append to parent of container so it's not hidden by slide overflows
+    if (this.container.parentElement) {
+      this.container.parentElement.appendChild(this.uiContainer);
+    } else {
+      this.container.appendChild(this.uiContainer);
+    }
+
+    // Initial UI update
+    this._updateUIState();
+  }
+
+  _updateUIState() {
+    if (!this.showUI || !this.uiContainer) return;
+
+    // Prev button state
+    if (this.currentSlideIndex === 0 && this.currentStepIndex === 0) {
+      this.btnPrev.classList.add('disabled');
+    } else {
+      this.btnPrev.classList.remove('disabled');
+    }
+
+    // Next button state
+    const currentData = this.slideData[this.currentSlideIndex];
+    if (this.currentSlideIndex === this.slides.length - 1 && this.currentStepIndex === currentData.maxStep) {
+      this.btnNext.classList.add('disabled');
+    } else {
+      this.btnNext.classList.remove('disabled');
+    }
+
+    // Update active menu item
+    this.menuItems.forEach((li, idx) => {
+      if (idx === this.currentSlideIndex) {
+        li.classList.add('active');
+      } else {
+        li.classList.remove('active');
+      }
+    });
   }
 
   _render() {
@@ -119,6 +225,8 @@ class Presentation {
         }
       }
     });
+
+    this._updateUIState();
   }
 
   next() {

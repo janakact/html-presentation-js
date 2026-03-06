@@ -1,4 +1,4 @@
-/* Premium Base Styling */
+/* Midnight Theme (Premium Dark) */
 :root {
     --bg-dark: #0f172a;
     --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
@@ -56,23 +56,13 @@ body {
     align-items: center;
     justify-content: center;
     perspective: 1000px;
+    z-index: 1;
+    /* Keep above bg shapes but below UI */
 }
 
-/* Slide base styling - User has full control over these classes */
+/* Slide styling */
 .slide-base {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
     padding: 4rem;
-    box-sizing: border-box;
-
-    /* Removed glassmorphism box for a true full-screen experience */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
@@ -139,14 +129,5 @@ p {
 .feature-card p {
     font-size: 1rem;
     margin: 0;
-}
-
-.controls-hint {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 0.05em;
+    color: var(--text-muted);
 }
