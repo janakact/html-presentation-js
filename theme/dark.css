@@ -1,0 +1,152 @@
+/* Premium Base Styling */
+:root {
+    --bg-dark: #0f172a;
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #8b5cf6;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background decoration */
+.bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.shape-1 {
+    top: -10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: #4c1d95;
+}
+
+.shape-2 {
+    bottom: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: #2563eb;
+}
+
+/* Presentation Container */
+#presentation-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+/* Slide base styling - User has full control over these classes */
+.slide-base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 4rem;
+    box-sizing: border-box;
+
+    /* Removed glassmorphism box for a true full-screen experience */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Typography */
+h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(to right, #a78bfa, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+}
+
+p {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    background: rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.grid-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: left;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    color: #fff;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.controls-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.05em;
+}

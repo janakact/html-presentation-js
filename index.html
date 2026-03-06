@@ -1,270 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HTML Presentation Demo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Presentation Demo</title>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-  <!-- Presentation Default Animations -->
-  <link rel="stylesheet" href="presentation.css">
+    <!-- Prism.js CSS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 
-  <style>
-    /* Premium Base Styling */
-    :root {
-      --bg-dark: #0f172a;
-      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #8b5cf6;
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.1);
-    }
+    <!-- Presentation Default Animations -->
+    <link rel="stylesheet" href="presentation.css">
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Outfit', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-main);
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-align: center;
-    }
-
-    /* Background decoration */
-    .bg-shape {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: -1;
-      opacity: 0.5;
-    }
-    .shape-1 {
-      top: -10%; left: -10%;
-      width: 500px; height: 500px;
-      background: #4c1d95;
-    }
-    .shape-2 {
-      bottom: -20%; right: -10%;
-      width: 600px; height: 600px;
-      background: #2563eb;
-    }
-
-    /* Presentation Container */
-    #presentation-root {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      perspective: 1000px;
-    }
-
-    /* Slide base styling - User has full control over these classes */
-    .slide-base {
-      position: absolute;
-      width: 80%;
-      max-width: 1000px;
-      height: 70%;
-      max-height: 600px;
-      padding: 3rem;
-      border-radius: 24px;
-      
-      /* Glassmorphism */
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-
-      /* Smooth transition between slides */
-      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
-    }
-
-    /* The states defined by data-vc and data-hc */
-    .slide-visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-      z-index: 10;
-    }
-
-    .slide-hidden {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(40px) scale(0.95);
-      z-index: 1;
-    }
-
-    /* Typography */
-    h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      margin: 0 0 1rem 0;
-      background: linear-gradient(to right, #a78bfa, #38bdf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.2;
-    }
-    
-    h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin: 0 0 1rem 0;
-    }
-
-    p {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      line-height: 1.6;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.25rem 1rem;
-      border-radius: 9999px;
-      background: rgba(139, 92, 246, 0.2);
-      color: #c4b5fd;
-      font-weight: 600;
-      font-size: 0.875rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .grid-features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-      width: 100%;
-    }
-
-    .feature-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 1.5rem;
-      border-radius: 16px;
-      text-align: left;
-    }
-
-    .feature-card h3 {
-      font-size: 1.25rem;
-      margin: 0 0 0.5rem 0;
-      color: #fff;
-    }
-    
-    .feature-card p {
-      font-size: 1rem;
-      margin: 0;
-    }
-
-    .controls-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.05em;
-    }
-  </style>
+    <!-- Presentation Theme -->
+    <link rel="stylesheet" href="theme/dark.css">
 </head>
+
 <body>
 
-  <!-- Decorative Background Elements -->
-  <div class="bg-shape shape-1"></div>
-  <div class="bg-shape shape-2"></div>
+    <!-- Decorative Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
 
-  <!-- Note: We define visible class and hidden class using shorthands data-vc / data-hc -->
-  <div id="presentation-root" data-vc="slide-visible" data-hc="slide-hidden">
-    
-    <!-- SLIDE 1: Title -->
-    <div class="slide-base slide-hidden">
-      <div class="badge">Presentation.js</div>
-      <h1>HTML-Native<br>Presentations</h1>
-      <p>A barebones, Unix-philosophy utility that turns pure HTML/CSS into a stateful presentation by toggling classes.</p>
-      
-      <!-- Animations: aip-init-fade starts elements hidden. On step 1, 1--aip-fade-in adds the fade-in class -->
-      <p class="aip-init-fade 1--aip-fade-in" style="margin-top: 2rem; font-weight: 600; color: #fff;">
-        Press Space or Right Arrow to continue
-      </p>
+    <!-- Note: We define visible, hidden, and base classes using shorthands data-vc, data-hc, data-bc -->
+    <div id="presentation-root" data-bc="slide-base" data-vc="slide-visible" data-hc="slide-hidden">
+
+        <!-- SLIDE 1: Title -->
+        <div>
+            <div class="badge">Presentation.js</div>
+            <h1>HTML-Native<br>Presentations</h1>
+            <p>A barebones, Unix-philosophy utility that turns pure HTML/CSS into a stateful presentation by toggling
+                classes.</p>
+
+            <!-- Animations: aip-init-fade starts elements hidden. On step 1, 1--aip-fade-in adds the fade-in class -->
+            <p class="aip-init-fade 1--aip-fade-in" style="margin-top: 2rem; font-weight: 600; color: #fff;">
+                Press Space or Right Arrow to continue
+            </p>
+        </div>
+
+        <!-- SLIDE 2: Features (Intra-slide animations) -->
+        <div>
+            <h2>Why use it?</h2>
+            <p>Unlike heavy frameworks, you bring your own HTML and CSS. We add state.</p>
+
+            <div class="grid-features">
+                <!-- Feature 1: appear on step 1 -->
+                <div class="feature-card aip-init-slide-up 1--aip-slide-up">
+                    <h3>No Virtual DOM</h3>
+                    <p>It's just vanilla JavaScript traversing and mutating standard DOM classes.</p>
+                </div>
+
+                <!-- Feature 2: appear on step 2 -->
+                <div class="feature-card aip-init-slide-up 2--aip-slide-up">
+                    <h3>Bring Your Own CSS</h3>
+                    <p>Style with Tailwind, Bootstrap, or plain CSS. Use the visual tools you already know.</p>
+                </div>
+
+                <!-- Feature 3: appear on step 3 -->
+                <div class="feature-card aip-init-slide-up 3--aip-slide-up">
+                    <h3>AI Friendly</h3>
+                    <p>LLMs are great at emitting styled HTML. Use them to generate slides instantly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Animation Syntax -->
+        <div>
+            <h2>Simple Declarative Animations</h2>
+            <p>Just add classes like <code>1--fade-in</code> or <code>2--slide-up</code>.</p>
+
+            <div style="margin-top: 2rem; border-radius: 12px; text-align: left; font-size: 1.2rem;">
+                <pre><code class="language-html">&lt;div class="slide-base"&gt;
+  &lt;h2&gt;Hello&lt;/h2&gt;
+  &lt;!-- Appears on next click/step 1 --&gt;
+  &lt;p class="hidden 1--visible"&gt;World&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <!-- Step 1 scales this image -->
+            <div class="aip-init-zoom 1--aip-zoom" style="margin-top: 2rem; font-size: 4rem;">
+                🚀
+            </div>
+        </div>
+
     </div>
 
-    <!-- SLIDE 2: Features (Intra-slide animations) -->
-    <div class="slide-base slide-hidden">
-      <h2>Why use it?</h2>
-      <p>Unlike heavy frameworks, you bring your own HTML and CSS. We add state.</p>
-      
-      <div class="grid-features">
-        <!-- Feature 1: appear on step 1 -->
-        <div class="feature-card aip-init-slide-up 1--aip-slide-up">
-          <h3>No Virtual DOM</h3>
-          <p>It's just vanilla JavaScript traversing and mutating standard DOM classes.</p>
-        </div>
-        
-        <!-- Feature 2: appear on step 2 -->
-        <div class="feature-card aip-init-slide-up 2--aip-slide-up">
-          <h3>Bring Your Own CSS</h3>
-          <p>Style with Tailwind, Bootstrap, or plain CSS. Use the visual tools you already know.</p>
-        </div>
-        
-        <!-- Feature 3: appear on step 3 -->
-        <div class="feature-card aip-init-slide-up 3--aip-slide-up">
-          <h3>AI Friendly</h3>
-          <p>LLMs are great at emitting styled HTML. Use them to generate slides instantly.</p>
-        </div>
-      </div>
-    </div>
+    <div class="controls-hint">SPACE / ARROWS TO NAVIGATE (OR CLICK)</div>
 
-    <!-- SLIDE 3: Animation Syntax -->
-    <div class="slide-base slide-hidden">
-      <h2>Simple Declarative Animations</h2>
-      <p>Just add classes like <code>1--fade-in</code> or <code>2--slide-up</code>.</p>
-      
-      <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.3); border-radius: 12px; font-family: monospace; text-align: left;">
-        <span style="color:#f472b6">&lt;div</span> <span style="color:#38bdf8">class</span>=<span style="color:#a3e635">"slide-base"</span><span style="color:#f472b6">&gt;</span><br>
-        &nbsp;&nbsp;<span style="color:#f472b6">&lt;h2&gt;</span>Hello<span style="color:#f472b6">&lt;/h2&gt;</span><br>
-        &nbsp;&nbsp;<span style="opacity: 0.5;">&lt;!-- Appears on next click/step 1 --&gt;</span><br>
-        &nbsp;&nbsp;<span style="color:#f472b6">&lt;p</span> <span style="color:#38bdf8">class</span>=<span style="color:#a3e635">"hidden 1--visible"</span><span style="color:#f472b6">&gt;</span>World<span style="color:#f472b6">&lt;/p&gt;</span><br>
-        <span style="color:#f472b6">&lt;/div&gt;</span>
-      </div>
+    <!-- Load library and initialize -->
+    <script src="presentation.js"></script>
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+        // Initialize exactly as user requested. Unix philosophy.
+        document.addEventListener('DOMContentLoaded', () => {
+            const p = new Presentation('#presentation-root');
 
-      <!-- Step 1 scales this image -->
-      <div class="aip-init-zoom 1--aip-zoom" style="margin-top: 2rem; font-size: 4rem;">
-        🚀
-      </div>
-    </div>
-
-  </div>
-
-  <div class="controls-hint">SPACE / ARROWS TO NAVIGATE (OR CLICK)</div>
-
-  <!-- Load library and initialize -->
-  <script src="presentation.js"></script>
-  <script>
-    // Initialize exactly as user requested. Unix philosophy.
-    document.addEventListener('DOMContentLoaded', () => {
-      const p = new Presentation('#presentation-root');
-      
-      // Optionally attach it window for debugging
-      window.p = p;
-    });
-  </script>
+            // Optionally attach it window for debugging
+            window.p = p;
+        });
+    </script>
 </body>
+
 </html>

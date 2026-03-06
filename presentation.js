@@ -10,13 +10,24 @@ class Presentation {
       return;
     }
 
-    // Read visible/hidden classes from container data attributes, fallback to options
+    // Read classes from container data attributes, fallback to options
     this.visibleClass = this.container.getAttribute('data-vc') || options.visibleClass || 'active';
     this.hiddenClass = this.container.getAttribute('data-hc') || options.hiddenClass || 'hidden';
+    this.baseClass = this.container.getAttribute('data-bc') || options.baseClass || '';
 
     // Direct children are slides
     this.slides = Array.from(this.container.children);
-    
+
+    // Auto-apply base and hidden classes to all slides initially
+    this.slides.forEach(slide => {
+      if (this.baseClass) {
+        // Handle multiple base classes separated by space
+        const baseClasses = this.baseClass.split(' ').filter(c => c.trim() !== '');
+        if (baseClasses.length > 0) slide.classList.add(...baseClasses);
+      }
+      slide.classList.add(this.hiddenClass);
+    });
+
     this.currentSlideIndex = 0;
     this.currentStepIndex = 0; // step inside the current slide
 
@@ -39,12 +50,12 @@ class Presentation {
         if (match) {
           const stepNumber = parseInt(match[1], 10);
           const classNameToAdd = match[2];
-          
+
           if (!steps[stepNumber]) {
             steps[stepNumber] = [];
           }
           steps[stepNumber].push({ element: el, className: classNameToAdd, originalClass: cls });
-          
+
           // Optionally, we can remove the '1--class' binding from the DOM to keep it clean, 
           // but leaving it is fine too, as it doesn't affect standard CSS rules unless defined.
         }
@@ -54,7 +65,7 @@ class Presentation {
     // Make steps array dense and sequential starting from step 1
     // (We'll assume step 0 is the base state of the slide without any new step classes added)
     const maxStep = steps.length > 0 ? steps.length - 1 : 0;
-    
+
     return {
       element: slide,
       maxStep: maxStep,
@@ -88,7 +99,7 @@ class Presentation {
         // and classes beyond are removed.
         for (let s = 1; s <= data.maxStep; s++) {
           if (!data.steps[s]) continue;
-          
+
           data.steps[s].forEach(action => {
             if (s <= this.currentStepIndex) {
               action.element.classList.add(action.className);
