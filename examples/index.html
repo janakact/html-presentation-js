@@ -15,10 +15,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 
     <!-- Presentation Default Animations -->
-    <link rel="stylesheet" href="presentation.css">
+    <link rel="stylesheet" href="../presentation.css">
 
     <!-- Presentation Theme -->
-    <link rel="stylesheet" href="theme/daylight.css">
+    <link rel="stylesheet" href="../theme/daylight.css">
 </head>
 
 <body>
@@ -91,14 +91,14 @@
     </div>
 
 
-    <!-- Load library and initialize -->
-    <script src="presentation.js"></script>
+    <!-- Load library and initialize from dist -->
+    <script src="../dist/presentation.min.js"></script>
     <!-- Prism.js for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script>
         // Initialize exactly as user requested. Unix philosophy.
         document.addEventListener('DOMContentLoaded', () => {
-            const p = new Presentation('#presentation-root');
+            const p = new PresentationWindow.Presentation('#presentation-root');
 
             // Optionally attach it window for debugging
             window.p = p;
