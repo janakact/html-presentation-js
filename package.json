@@ -14,7 +14,7 @@
   "files": [
     "dist/",
     "theme/",
-    "presentation.css"
+    "src/presentation.css"
   ],
   "keywords": [
     "presentation",

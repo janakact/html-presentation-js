@@ -25,7 +25,7 @@ You can directly include the minified script and styles in your HTML file:
 <script src="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/dist/presentation.min.js"></script>
 
 <!-- Optional: Default animation utilities (fade, slide-up, etc.) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/presentation.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/src/presentation.css">
 
 <!-- Optional: Pre-built Themes -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/theme/midnight.css"> <!-- Dark, premium -->

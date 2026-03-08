@@ -1,0 +1,202 @@
+/* 
+ * Presentation Library - Optional Default Animations
+ * Provides common classes for step animations. 
+ * E.g., apply 1--aip-fade-in to fade an element in on step 1.
+ */
+
+/* Base transition utility to make everything smooth automatically */
+.aip-transition {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 
+ * Fade In 
+ * Usage: Elements should start with opacity: 0. Add .aip-fade-in to make visible.
+ */
+.aip-fade-in {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Set up starting state for elements that will use fade-in */
+.aip-init-fade {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* 
+ * Slide Up & Fade
+ * Starts slightly lower and transparent
+ */
+.aip-init-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aip-slide-up {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* 
+ * Zoom In
+ */
+.aip-init-zoom {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aip-zoom {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+/*
+ * Slide In Right
+ */
+.aip-init-slide-right {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aip-slide-right {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+/* 
+ * Core Presentation State Classes
+ * These are recommended defaults for data-vc and data-hc toggling.
+ */
+.slide-base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* Smooth transition between slide states */
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+}
+
+.slide-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    z-index: 10;
+}
+
+.slide-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(40px) scale(0.95);
+    z-index: 1;
+}
+
+/* 
+ * Core UI Controls 
+ * Injected by library if options.ui !== false
+ */
+.aip-ui-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    font-family: sans-serif;
+    align-items: center;
+}
+
+.aip-btn {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.aip-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.aip-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Menu popup */
+.aip-menu {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 0;
+    min-width: 250px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.aip-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.aip-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.aip-menu li {
+    padding: 10px 20px;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s, color 0.2s;
+}
+
+.aip-menu li:last-child {
+    border-bottom: none;
+}
+
+.aip-menu li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.aip-menu li.active {
+    color: #fff;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.05);
+}
