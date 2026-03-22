@@ -22,15 +22,13 @@ You can directly include the minified script and styles in your HTML file:
 
 ```html
 <!-- The Core Library -->
-<script src="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/dist/presentation.min.js"></script>
-
-<!-- Optional: Default animation utilities (fade, slide-up, etc.) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/src/presentation.css">
+<script src="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.1/dist/presentation.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.1/dist/presentation.css">
 
 <!-- Optional: Pre-built Themes -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/theme/midnight.css"> <!-- Dark, premium -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/theme/daylight.css"> Light, clean -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/theme/academic.css"> Paper, serif -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.1/dist/theme/midnight.css"> <!-- Dark, premium -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/dist/theme/daylight.css"> Light, clean -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.0/dist/theme/academic.css"> Paper, serif -->
 ```
 
 ## Usage

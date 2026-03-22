@@ -11,14 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    <!-- Prism.js CSS for Syntax Highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 
-    <!-- Presentation Default Animations -->
-    <link rel="stylesheet" href="../src/presentation.css">
+    <script src="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.1/dist/presentation.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.1/dist/presentation.css">
 
-    <!-- Presentation Theme -->
-    <link rel="stylesheet" href="../theme/academic.css">
+    <!-- Optional: Pre-built Themes -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/html-presentation-js@1.0.1/dist/theme/midnight.css">
 </head>
 
 <body>
@@ -91,10 +91,6 @@
     </div>
 
 
-    <!-- Load library and initialize from dist -->
-    <script src="../dist/presentation.min.js"></script>
-    <!-- Prism.js for syntax highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script>
         // Initialize exactly as user requested. Unix philosophy.
         document.addEventListener('DOMContentLoaded', () => {

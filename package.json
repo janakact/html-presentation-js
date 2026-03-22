@@ -1,6 +1,6 @@
 {
   "name": "html-presentation-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimalist, Unix-philosophy HTML presentation library that toggles classes instead of using Virtual DOMs.",
   "main": "dist/presentation.js",
   "module": "dist/presentation.esm.js",
@@ -8,13 +8,12 @@
   "jsdelivr": "dist/presentation.min.js",
   "types": "dist/presentation.d.ts",
   "scripts": {
-    "build": "tsc && esbuild src/presentation.ts --bundle --outfile=dist/presentation.js --format=iife --global-name=PresentationWindow && esbuild src/presentation.ts --bundle --minify --outfile=dist/presentation.min.js --format=iife --global-name=PresentationWindow && esbuild src/presentation.ts --bundle --outfile=dist/presentation.esm.js --format=esm",
+    "build": "tsc && node build.js",
     "prepublishOnly": "npm run build"
   },
   "files": [
     "dist/",
-    "theme/",
-    "src/presentation.css"
+    "src/"
   ],
   "keywords": [
     "presentation",
